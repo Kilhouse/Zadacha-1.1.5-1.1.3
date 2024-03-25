@@ -20,7 +20,6 @@ public class Main {
         UserService userService = UserServiceImpl.getInstance();
 
         userService.createUsersTable();
-
         for (User user : userList) {
             userService.saveUser(user.getName(),
                     user.getLastName(),
