@@ -5,22 +5,24 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Util {
-    private static final String USERNAME_KEY = "db.username";
-    private static final String PASSWORD_KEY = "db.password";
-    private static final String URL_KEY = "db.url";
+    private static String url = "jdbc:mysql://localhost:3306/MySql?useSSL=false&serverTimezone=UTC";
+    private static String user = "root";
+    private static String password = "root";
 
+    public static Connection createConnection() {
+        Connection connection = null;
 
-
-
-    private Util() {
+        {
+            try {
+                connection = DriverManager.getConnection(url, user, password);
+                connection.setAutoCommit(false);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return connection;
     }
 
-    public static Connection getConnection() throws SQLException, RuntimeException {
 
-        return DriverManager.getConnection(
-                Property.get(URL_KEY),
-                Property.get(USERNAME_KEY),
-                Property.get(PASSWORD_KEY));
-    }
 }
 
